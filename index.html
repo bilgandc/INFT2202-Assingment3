@@ -1,0 +1,120 @@
+<!--
+* INFT2202 - Assignment 2
+* Student ID: 100948423 & 100589655
+* Name: Bilgan Kiris & Mariah Laroco
+* Date: February 23th, 2025
+ -->
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./node_modules/@fortawesome/fontawesome-free/css/all.css">
+    <link rel="stylesheet" href="./content/style.css">
+</head>
+<body>
+<header id="header-placeholder">
+
+</header>
+
+
+
+<main class="container mt-5">
+
+    <h1>Welcome to Volunteer Connect!</h1>
+    <p>Thank you for visiting Volunteer Connect. We are excited to have you join us in making a positive impact in the community. Explore our volunteer opportunities and get involved today!</p>
+
+    <!-- Carousel -->
+    <div id="carouselIndicators" class="carousel slide mb-5" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="./content/images/i4.jpg" class="d-block w-100" alt="Volunteer Activity 1">
+            </div>
+            <div class="carousel-item">
+                <img src="./content/images/i2.jpg" class="d-block w-100" alt="Volunteer Activity 2">
+            </div>
+            <div class="carousel-item">
+                <img src="./content/images/i3.jpg" class="d-block w-100" alt="Volunteer Activity 3">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselIndicators" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    <!-- Volunteer Opportunities Section -->
+    <section>
+        <h2 class="section-title">Volunteer Opportunities</h2>
+        <p>
+            Discover ways to give back to your community through volunteering. Choose from a variety of opportunities that suit your skills and interests.
+        </p>
+        <div class="calendar-container text-center mt-4">
+            <i class="fa-solid fa-calendar-days" style="color: #ff0055; font-size: 30px;"></i>
+        </div>
+        <div class="d-flex justify-content-center">
+            <button id="getInvolved" class="discover-button" href="opportunities.html">Get Involved</button>
+        </div>
+    </section>
+
+    <!-- Featured Volunteer Section -->
+    <section class="mt-5">
+        <h3 class="feature-title">Featured Volunteer</h3>
+        <p class="feature-paragraph">Celebrating the exceptional contributions of our volunteers.</p>
+        <div class="feature-content d-flex align-items-center mt-4">
+            <div class="feature-image me-4">
+                <img src="./content/images/b.jpg" alt="Featured Volunteer">
+            </div>
+            <div>
+                <p><em>
+                    "Volunteers don't just give, they make a difference that lasts a lifetime."</em>
+                </p>
+                <br><p><strong><em>- Bilgan Kiris</em></strong></p>
+            </div>
+        </div>
+        <div class="feature-content d-flex align-items-center mt-4">
+            <div class="feature-image me-4">
+                <img src="./content/images/m.jpg" alt="Featured Volunteer">
+            </div>
+            <div>
+                <p><em>
+                    "Volunteering has changed my life. It's a way to make a real difference in my community."</em>
+                </p>
+                <br><p><strong><em>- Mariah Laroco</em></strong></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- API section: nearby volunteer opportunities-->
+    <section id="volunteerApiSection" class="mt-5">
+        <h3 class="section-title">News</h3>
+        <p>
+            Discover volunteer opportunities near you through our community.
+        </p>
+        <div id="newsContainer" class="mt-4">
+
+        </div>
+    </section>
+</main>
+
+<footer id="footer-placeholder" class="footer mt-auto py-3 bg-body-tertiary">
+
+</footer>
+
+<script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/scripts/main.js"></script>
+<script src="./scripts/route.js"></script>
+</body>
+</html>
