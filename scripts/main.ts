@@ -25,12 +25,95 @@ interface NewsArticle {
 }
 
 interface EventData {
+    category: string;
     name: string;
     date: string;
     time: string;
     location: string;
     description: string;
 }
+
+// Global variables
+let currentDate = new Date();
+let events: EventData[] = []; // This will hold the events fetched from localStorage or an API
+let selectedCategory = "all"; // Default category filter
+
+function generateCalendarDays(year: number, month: number): string {
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    let calendarDays = "";
+
+    const filteredEvents = events.filter(event => selectedCategory === "all" || event.category === selectedCategory);
+    const eventDates = filteredEvents.map(event => formatDateToString(new Date(event.date)));
+
+    for (let i = 1; i <= daysInMonth; i++) {
+        const dayDate = `${year}-${String(month + 1).padStart(2, "0")}-${String(i).padStart(2, "0")}`;
+        const isEventDay = eventDates.includes(dayDate);
+
+        calendarDays += `
+            <div class="day ${isEventDay ? 'highlight' : ''}" data-date="${dayDate}">${i}</div>
+        `;
+    }
+
+    return calendarDays;
+}
+
+function displayCalendar(): void {
+    const monthNames = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December",
+    ];
+
+    const monthName = monthNames[currentDate.getMonth()];
+    document.getElementById("calendarMonth")!.innerText = `${monthName} ${currentDate.getFullYear()}`;
+    document.getElementById("calendarDays")!.innerHTML = generateCalendarDays(currentDate.getFullYear(), currentDate.getMonth());
+
+    document.querySelectorAll(".day").forEach((day) => {
+        day.addEventListener("click", function () {
+            const selectedDate = day.getAttribute("data-date");
+            displayEventsForDate(selectedDate!);
+        });
+    });
+}
+
+function displayEventsForDate(selectedDate: string): void {
+    const eventDetails = document.getElementById("eventDetails")!;
+    eventDetails.innerHTML = ""; // Clear existing events
+
+    const filteredEvents = events.filter((event) => {
+        const eventDate = formatDateToString(new Date(event.date));
+        return eventDate === selectedDate && (selectedCategory === "all" || event.category === selectedCategory);
+    });
+
+    if (filteredEvents.length > 0) {
+        filteredEvents.forEach((event) => {
+            const eventElement = document.createElement("div");
+            eventElement.classList.add("event", event.category);
+            eventElement.innerHTML = `
+                <strong>${event.name}</strong>
+                <p>${event.description}</p>
+                <p><small>Date: ${new Date(event.date).toLocaleDateString()}</small></p>
+            `;
+            eventDetails.appendChild(eventElement);
+        });
+    } else {
+        eventDetails.innerHTML = "<p>No events for this day.</p>";
+    }
+}
+
+function formatDateToString(date: Date): string {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+}
+
+function changeMonth(direction: number): void {
+    currentDate.setMonth(currentDate.getMonth() + direction);
+    displayCalendar();
+}
+
+document.getElementById("prevMonth")!.addEventListener("click", () => changeMonth(-1));
+document.getElementById("nextMonth")!.addEventListener("click", () => changeMonth(1));
 
 // Utility function for AJAX requests
 async function fetchData<T>(url: string): Promise<T> {
@@ -113,6 +196,7 @@ function handleEventForm(): void {
 
         // Get form values
         const newEvent: EventData = {
+            category: (document.getElementById("eventCategory") as HTMLSelectElement).value.trim(),
             name: (document.getElementById("eventName") as HTMLInputElement).value.trim(),
             date: (document.getElementById("eventDate") as HTMLInputElement).value.trim(),
             time: (document.getElementById("eventTime") as HTMLInputElement).value.trim(),
@@ -311,6 +395,17 @@ async function displayStatisticsPage(): Promise<void> {
     }
 }
 
+async function fetchEvents(): Promise<void> {
+    try {
+        // Fetch events from the JSON file
+        const fetchedEvents = await fetchData<EventData[]>("data/events.json");
+        events = fetchedEvents; // Assign the fetched events to the global `events` array
+        displayCalendar(); // Re-render the calendar with the fetched events
+    } catch (error) {
+        console.error("Error fetching events:", error);
+    }
+}
+
 // Initialize the application
 document.addEventListener("DOMContentLoaded", () => {
     const currentPage = window.location.pathname;
@@ -324,5 +419,8 @@ document.addEventListener("DOMContentLoaded", () => {
         handleEventForm(); // Handle event form submission
         displayEvents(); // Display existing events
         initializeCalendar(); // Initialize the calendar
+
+        // Fetch events from events.json and initialize the calendar
+        fetchEvents();
     }
 });

@@ -424,3 +424,41 @@ button {
     color: #fff;
 }
 
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+}
+
+.day {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+    cursor: pointer;
+}
+
+.day.highlight {
+    background-color: #f0f8ff;
+    border-color: #007bff;
+    color: #007bff;
+}
+
+.day:hover {
+    background-color: #e9ecef;
+}
+
+#createEventForm {
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+}
+
+#eventDetails .event {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+}
+
