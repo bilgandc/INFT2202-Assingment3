@@ -29,36 +29,89 @@
     <h1>Upcoming Events</h1>
 
 
-<div class="container">
-    <div class="filter">
-        <label for="eventCategory">Filter by category:</label>
-        <select id="eventCategory">
-            <option value="all">All</option>
-            <option value="fundraisers">Fundraisers</option>
-            <option value="workshops">Workshops</option>
-            <option value="cleanups">Cleanups</option>
-        </select>
-    </div>
+    <div class="container">
+        <div class="filter">
+            <label for="eventCategory">Filter by category:</label>
+            <select id="eventCategory">
+                <option value="all">All</option>
+                <option value="fundraisers">Fundraisers</option>
+                <option value="workshops">Workshops</option>
+                <option value="cleanups">Cleanups</option>
+            </select>
+        </div>
 
-    <!-- Calendar Header with Month Name -->
-    <div class="calendar-header">
-        <span id="monthName"></span> <!-- Month Name centered -->
-    </div>
+        <!-- Calendar Header with Month Name -->
+        <div class="calendar-header">
+            <span id="monthName"></span> <!-- Month Name centered -->
+        </div>
 
-    <!-- Buttons below the Calendar Header -->
-    <div class="calendar-buttons">
-        <button id="prevMonth">Prev</button>
-        <button id="nextMonth">Next</button>
-    </div>
+        <!-- Buttons below the Calendar Header -->
+        <div class="calendar-buttons">
+            <button id="prevMonth">Prev</button>
+            <button id="nextMonth">Next</button>
+        </div>
 
-    <!-- Calendar Grid -->
-    <div class="calendar">
-        <div class="month" id="calendarMonth"></div>
-        <div class="days" id="calendarDays"></div>
-    </div>
+        <!-- Calendar Grid -->
+        <div class="calendar">
+            <div class="month" id="calendarMonth"></div>
+            <div class="days" id="calendarDays"></div>
+        </div>
 
-    <div id="eventDetails"></div>
-</div>
+        <div id="eventDetails"></div>
+
+        <!-- Calendar Section -->
+        <div id="calendarContainer" class="mt-5">
+            <h2 class="mb-4">Event Calendar</h2>
+            <div id="calendar"></div>
+        </div>
+
+        <!-- Event Creation Form -->
+        <div id="eventFormContainer" class="mt-5">
+            <h2 class="mb-4">Create an Event</h2>
+            <form id="eventForm" class="row g-3">
+                <!-- Event Name -->
+                <div class="col-md-6">
+                    <label for="eventName" class="form-label">Event Name</label>
+                    <input type="text" id="eventName" name="eventName" class="form-control" placeholder="Enter event name" required />
+                </div>
+
+                <!-- Event Date -->
+                <div class="col-md-3">
+                    <label for="eventDate" class="form-label">Date</label>
+                    <input type="date" id="eventDate" name="eventDate" class="form-control" required />
+                </div>
+
+                <!-- Event Time -->
+                <div class="col-md-3">
+                    <label for="eventTime" class="form-label">Time</label>
+                    <input type="time" id="eventTime" name="eventTime" class="form-control" required />
+                </div>
+
+                <!-- Event Location -->
+                <div class="col-md-6">
+                    <label for="eventLocation" class="form-label">Location</label>
+                    <input type="text" id="eventLocation" name="eventLocation" class="form-control" placeholder="Enter event location" required />
+                </div>
+
+                <!-- Event Description -->
+                <div class="col-md-12">
+                    <label for="eventDescription" class="form-label">Description</label>
+                    <textarea id="eventDescription" name="eventDescription" class="form-control" rows="4" placeholder="Enter event description" required></textarea>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">Create Event</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Event List -->
+        <div id="eventListContainer">
+            <h2>Planned Events</h2>
+            <div id="eventList"></div>
+        </div>
+    </div>
 </main>
 
 
